@@ -1049,10 +1049,10 @@
                 </div>
 
                 <div class="cta-section">
-                    <h3>Ready to Take the Next Step?</h3>
-                    <p>Santino can help fill in the gaps and guide you through the entire process with personalized advice tailored to your situation.</p>
-                    <button class="contact-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Speak with Santino</button>
-                    <button class="retry-btn" onclick="location.reload()">Retake Quiz</button>
+                    <h3>Want to Turn Knowledge Into Action?</h3>
+                    <p>You've learned what matters in the loan process. Now let Santino show you how this knowledge applies to your specific financial situation and goals.</p>
+                    <button class="contact-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Personalized Guidance from Santino</button>
+                    <button class="retry-btn" onclick="location.reload()">Try the Other Quiz Type</button>
                 </div>
             </div>
         </div>
@@ -1432,6 +1432,74 @@
             }
         });
 
+        // Educational insights for each category
+        const categoryInsights = {
+            "Deposit & LMI Requirements": {
+                insight: "Understanding deposit requirements is crucial for planning your home purchase. A 20% deposit avoids Lenders Mortgage Insurance (LMI), which can save you thousands. However, schemes like the First Home Guarantee allow you to purchase with just 5% down.",
+                tip: "Pro tip: Even if you have less than 20%, options exist - but knowing the true cost of LMI helps you make informed decisions."
+            },
+            "Borrowing Capacity": {
+                insight: "Your borrowing capacity isn't just about income - lenders consider your entire financial picture including debts, living expenses, and future commitments. Understanding this helps you know what you can realistically afford.",
+                tip: "Quick fact: Paying off credit cards or reducing limits can significantly increase your borrowing power!"
+            },
+            "Government Schemes": {
+                insight: "Government schemes like the First Home Guarantee can be game-changers, allowing eligible buyers to purchase with smaller deposits and no LMI. Income limits and property price caps apply.",
+                tip: "Did you know? These schemes are updated regularly - staying informed could save you tens of thousands!"
+            },
+            "Interest Rates": {
+                insight: "Fixed vs variable rates each have benefits. Fixed gives certainty, variable offers flexibility and potential savings when rates drop. Many borrowers use a split strategy.",
+                tip: "Market timing matters: Understanding rate cycles can help you choose the right product for your situation."
+            },
+            "Loan Fees & Costs": {
+                insight: "Home loans involve more than just the interest rate. Application fees, valuation fees, settlement costs, and ongoing fees can add up. LMI alone can cost thousands if you're borrowing above 80% LVR.",
+                tip: "Hidden costs add up: A comprehensive fee comparison can reveal the true cost difference between lenders."
+            },
+            "Eligibility Requirements": {
+                insight: "Lenders have strict eligibility criteria including age, residency status, employment history, and credit score. Knowing these requirements helps you prepare your application properly.",
+                tip: "Preparation is key: Understanding what lenders look for means you can strengthen weak areas before applying."
+            },
+            "Credit Assessment": {
+                insight: "Your credit assessment goes beyond just your credit score. Lenders examine total credit limits (not just balances), recent credit applications, and your entire debt-to-income ratio.",
+                tip: "Smart move: Reducing credit card limits you don't use can immediately improve your borrowing capacity!"
+            },
+            "Using a Broker": {
+                insight: "Mortgage brokers access 60+ lenders compared to banks offering only their products. They handle paperwork, negotiate rates, and often cost you nothing as lenders pay their fees.",
+                tip: "Insider knowledge: Brokers know which lenders suit different situations - saving you time and potentially getting better rates."
+            },
+            "Deposit Requirements": {
+                insight: "Commercial loans require significantly higher deposits (30-40%) compared to residential (5-20%). This reflects the higher risk lenders take with commercial properties.",
+                tip: "Planning ahead: Knowing deposit requirements early helps you set realistic timelines for commercial purchases."
+            },
+            "Loan-to-Value Ratios": {
+                insight: "LVR limits vary by property value in commercial lending. Properties up to $2M can access 75% LVR, while $2M-$5M drops to 70%. This directly impacts how much you need to save.",
+                tip: "Strategic insight: Higher value properties require more equity - factor this into your investment planning."
+            },
+            "Documentation Requirements": {
+                insight: "Full Doc commercial loans need comprehensive financials - 2 years of tax returns, financial statements, and proof your income exceeds interest costs. This verification protects both you and the lender.",
+                tip: "Get organized: Having documentation ready speeds up approval and shows lenders you're a serious borrower."
+            },
+            "Loan Types": {
+                insight: "Commercial lending offers flexible documentation options. Lease Doc loans only require rental income proof, while Full Doc needs complete financials. Each suits different borrower situations.",
+                tip: "Choose wisely: Understanding which loan type fits your situation can make approval easier and faster."
+            },
+            "Lenders": {
+                insight: "All major Australian banks (ANZ, CBA, Westpac, NAB) plus smaller lenders offer commercial loans. Each has different policies, rates, and approval criteria - more options mean better chances of approval.",
+                tip: "Don't limit yourself: Different lenders suit different deals - a broker's network access is invaluable here."
+            },
+            "Financial Assessment": {
+                insight: "Commercial lenders need a complete financial picture: lease agreements, asset/liability statements, and serviceability proof. This comprehensive assessment ensures sustainable borrowing.",
+                tip: "Presentation matters: Well-organized financials demonstrate professionalism and can speed up approvals."
+            },
+            "Income Verification": {
+                insight: "Commercial lending offers more flexibility than residential. Lease Doc (rental income only) and Full Doc (complete financials) give borrowers options based on their situation.",
+                tip: "Know your options: The right verification method can make the difference between approval and rejection."
+            },
+            "Application Process": {
+                insight: "Major banks prefer you apply via phone or in-person with a business banker for commercial loans. This personalized approach helps them understand complex commercial scenarios.",
+                tip: "Build relationships: Commercial lending is relationship-driven - face-to-face contact often leads to better outcomes."
+            }
+        };
+
         function showResults() {
             const totalPoints = questions.reduce((sum, q) => sum + q.points, 0);
             const percentage = (score / totalPoints) * 100;
@@ -1443,18 +1511,25 @@
             document.getElementById('totalPoints').textContent = totalPoints;
 
             let message = '';
-            if (percentage >= 80) message = "Outstanding! You have an excellent understanding of the loan process.";
-            else if (percentage >= 60) message = "Great job! You have a solid foundation, but there's room to learn more.";
-            else if (percentage >= 40) message = "Good start! You understand some key concepts, but let's fill in the gaps.";
-            else message = "Thanks for trying! There's a lot to learn, and that's exactly why Santino is here to help.";
+            if (percentage >= 80) message = "🎉 Outstanding! You have an excellent understanding of the loan process.";
+            else if (percentage >= 60) message = "👏 Great job! You have a solid foundation, but there's more to discover.";
+            else if (percentage >= 40) message = "💪 Good start! You understand key concepts - let's build on that knowledge.";
+            else message = "🌟 Thanks for trying! There's exciting knowledge to gain - you're already on the learning path.";
 
             document.getElementById('resultsMessage').textContent = message;
 
             const categories = {};
+            const missedQuestions = [];
+
             questions.forEach((q, index) => {
-                if (!categories[q.category]) categories[q.category] = { correct: 0, total: 0 };
+                if (!categories[q.category]) categories[q.category] = { correct: 0, total: 0, questions: [] };
                 categories[q.category].total++;
-                if (userAnswers[index] === q.correct) categories[q.category].correct++;
+                categories[q.category].questions.push({ question: q, userAnswer: userAnswers[index], index });
+                if (userAnswers[index] === q.correct) {
+                    categories[q.category].correct++;
+                } else {
+                    missedQuestions.push({ question: q, category: q.category, index });
+                }
             });
 
             const strengths = [];
@@ -1462,18 +1537,33 @@
 
             Object.entries(categories).forEach(([category, data]) => {
                 if (data.correct === data.total) {
-                    strengths.push(`${category} - Perfect score!`);
+                    strengths.push(`<strong>${category}</strong> - Perfect score! You've mastered this area. 🏆`);
                 } else if (data.correct / data.total >= 0.5) {
-                    strengths.push(`${category} - ${data.correct} out of ${data.total} correct`);
+                    strengths.push(`<strong>${category}</strong> - ${data.correct} out of ${data.total} correct. You're on the right track! ✓`);
                 } else {
-                    weaknesses.push(`${category} - This is an important area to discuss with a broker`);
+                    const insight = categoryInsights[category];
+                    if (insight) {
+                        weaknesses.push(`
+                            <div style="margin-bottom: 20px;">
+                                <strong style="color: #f57c00; font-size: 16px;">${category}</strong>
+                                <p style="margin: 8px 0; color: #666; line-height: 1.6;">${insight.insight}</p>
+                                <p style="margin: 8px 0; padding: 10px; background: #fff3e0; border-radius: 6px; color: #e65100; font-size: 14px;">
+                                    💡 ${insight.tip}
+                                </p>
+                            </div>
+                        `);
+                    }
                 }
             });
 
-            document.getElementById('strengthsList').innerHTML = strengths.map(s => `<li>${s}</li>`).join('');
-            document.getElementById('weaknessesList').innerHTML = weaknesses.length > 0
-                ? weaknesses.map(w => `<li>${w}</li>`).join('')
-                : '<li>You\'re doing great! Santino can help you master these final details.</li>';
+            document.getElementById('strengthsList').innerHTML = strengths.map(s => `<li style="margin-bottom: 8px;">${s}</li>`).join('');
+
+            if (weaknesses.length > 0) {
+                document.getElementById('weaknessesList').innerHTML = weaknesses.join('');
+                document.querySelector('#weaknesses h3').textContent = '📚 Knowledge to Explore';
+            } else {
+                document.getElementById('weaknessesList').innerHTML = '<li>You\'re doing fantastic! Santino can help you apply this knowledge to your specific situation.</li>';
+            }
 
             document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
         }

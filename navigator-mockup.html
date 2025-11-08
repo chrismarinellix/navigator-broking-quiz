@@ -90,8 +90,18 @@
             position: relative;
             height: 500px;
             overflow: hidden;
-            background: linear-gradient(135deg, rgba(74, 164, 136, 0.3) 0%, rgba(45, 122, 99, 0.3) 100%),
-                        url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1920&h=800&fit=crop') center/cover;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=800&fit=crop&sat=-100') center/cover;
+        }
+
+        .hero-slider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(74, 164, 136, 0.15) 0%, rgba(45, 122, 99, 0.15) 100%);
+            z-index: 1;
         }
 
         .slide {
@@ -104,10 +114,10 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: white;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+            z-index: 2;
         }
 
         .slide.active {
@@ -116,38 +126,38 @@
         }
 
         .slide-content {
-            max-width: 800px;
-            padding: 40px 20px;
+            max-width: 850px;
+            padding: 50px 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .slide h1 {
             font-size: 48px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-weight: 700;
             font-family: 'Lato', sans-serif;
-            text-shadow: 0 3px 12px rgba(0,0,0,0.6), 0 1px 3px rgba(0,0,0,0.8);
-            background: rgba(0,0,0,0.3);
-            padding: 15px 30px;
-            border-radius: 10px;
-            display: inline-block;
+            color: #333;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.8);
         }
 
         .slide p {
-            font-size: 20px;
-            margin-bottom: 20px;
-            line-height: 1.7;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.9);
-            background: rgba(0,0,0,0.25);
-            padding: 12px 25px;
-            border-radius: 8px;
-            display: inline-block;
+            font-size: 19px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #444;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
 
         .hero-quiz-btn {
-            background: white;
-            color: var(--secondary);
+            background: var(--secondary);
+            color: white;
             padding: 18px 50px;
-            border: none;
+            border: 2px solid white;
             border-radius: 50px;
             font-size: 20px;
             font-weight: 700;
@@ -155,13 +165,14 @@
             transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(74, 164, 136, 0.4);
+            margin-top: 25px;
         }
 
         .hero-quiz-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 12px 35px rgba(74, 164, 136, 0.6);
+            background: #3d8f76;
         }
 
         .slide-indicators {
@@ -896,21 +907,58 @@
         .cta-section {
             background: linear-gradient(135deg, var(--secondary) 0%, #2d7a63 100%);
             color: white;
-            padding: 40px;
-            border-radius: 15px;
-            margin-top: 40px;
+            padding: 50px 40px;
+            border-radius: 20px;
+            margin-top: 50px;
+            box-shadow: 0 12px 40px rgba(74, 164, 136, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-section h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section p {
+            font-size: 19px;
+            margin-bottom: 35px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
         }
 
         .contact-btn {
             background: white;
             color: var(--secondary);
-            padding: 15px 40px;
+            padding: 20px 50px;
             border: none;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: 600;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .retry-btn {

@@ -50,12 +50,39 @@
             padding: 10px 0;
         }
 
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
         .logo {
             font-size: 28px;
             font-weight: 700;
             color: var(--secondary);
             font-family: 'Lato', sans-serif;
             letter-spacing: -0.5px;
+        }
+
+        .header-quiz-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .header-quiz-btn:hover {
+            background: #3d8f76;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 164, 136, 0.3);
         }
 
         /* Hero Slider */
@@ -924,7 +951,10 @@
     <!-- Header -->
     <header>
         <div class="container">
-            <div class="logo">NAVIGATOR BROKING</div>
+            <nav>
+                <div class="logo">NAVIGATOR BROKING</div>
+                <a href="#quiz" class="header-quiz-btn" onclick="event.preventDefault(); document.getElementById('quiz').style.display='block'; document.getElementById('quiz').scrollIntoView({behavior:'smooth'});">Start Knowledge Quiz</a>
+            </nav>
         </div>
     </header>
 

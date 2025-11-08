@@ -478,12 +478,15 @@
         }
 
         .quiz-container {
-            max-width: 800px;
+            max-width: 900px;
+            width: 95%;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
             padding: 40px;
             box-shadow: 0 10px 30px rgba(74, 164, 136, 0.15);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .quiz-header {
@@ -623,9 +626,9 @@
         }
 
         .question-text {
-            font-size: 20px;
+            font-size: 18px;
             color: var(--text);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             font-weight: 600;
             line-height: 1.5;
         }
@@ -728,15 +731,16 @@
 
         .answer-option {
             background: #f8f9fa;
-            padding: 16px 18px;
+            padding: 14px 16px;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid #e9ecef;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             position: relative;
+            font-size: 15px;
         }
 
         .answer-option:hover {
@@ -986,7 +990,28 @@
             }
 
             .quiz-container {
-                padding: 30px 20px;
+                padding: 25px 15px;
+                width: 98%;
+            }
+
+            .question-text {
+                font-size: 16px;
+            }
+
+            .answer-option {
+                padding: 12px 14px;
+                font-size: 14px;
+            }
+
+            .score-tracker {
+                top: 70px;
+                right: 10px;
+                padding: 15px 20px;
+                min-width: 120px;
+            }
+
+            .score-tracker-number {
+                font-size: 28px;
             }
         }
     </style>

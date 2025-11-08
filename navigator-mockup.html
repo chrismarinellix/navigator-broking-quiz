@@ -128,8 +128,12 @@
         .slide-content {
             max-width: 850px;
             padding: 50px 40px;
-            background: transparent;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .slide h1 {
@@ -137,16 +141,16 @@
             margin-bottom: 25px;
             font-weight: 700;
             font-family: 'Lato', sans-serif;
-            color: #333;
-            text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+            color: #1b1b1b;
+            text-shadow: none;
         }
 
         .slide p {
             font-size: 19px;
             margin-bottom: 15px;
             line-height: 1.8;
-            color: #444;
-            text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+            color: #262626;
+            text-shadow: none;
         }
 
         .hero-quiz-btn {
@@ -905,7 +909,10 @@
         }
 
         .cta-section {
-            background: linear-gradient(135deg, var(--secondary) 0%, #2d7a63 100%);
+            background: rgba(74, 164, 136, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
             padding: 50px 40px;
             border-radius: 20px;
@@ -941,6 +948,34 @@
             z-index: 1;
         }
 
+        @keyframes pulsate {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            }
+        }
+
+        @keyframes name-pulse {
+            0%, 100% {
+                transform: scale(1);
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                transform: scale(1.08);
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        .pulsate-name {
+            display: inline-block;
+            animation: name-pulse 2s ease-in-out infinite;
+            font-weight: 700;
+        }
+
         .contact-btn {
             background: white;
             color: var(--secondary);
@@ -954,11 +989,15 @@
             position: relative;
             z-index: 1;
             box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            animation: pulsate 2s ease-in-out infinite;
+            display: inline-block;
+            margin-bottom: 15px;
         }
 
         .contact-btn:hover {
             transform: translateY(-4px) scale(1.05);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: none;
         }
 
         .retry-btn {
@@ -972,6 +1011,14 @@
             cursor: pointer;
             margin-left: 15px;
             transition: all 0.3s;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .retry-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
@@ -1148,8 +1195,8 @@
 
                 <div class="cta-section">
                     <h3>Want to Turn Knowledge Into Action?</h3>
-                    <p>You've learned what matters in the loan process. Now let Santino show you how this knowledge applies to your specific financial situation and goals.</p>
-                    <button class="contact-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Personalized Guidance from Santino</button>
+                    <p>You've learned what matters in the loan process. Now let <span class="pulsate-name">Santino</span> show you how this knowledge applies to your specific financial situation and goals.</p>
+                    <button class="contact-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Personalized Guidance from <span class="pulsate-name">Santino</span></button>
                     <button class="retry-btn" onclick="location.reload()">Try the Other Quiz Type</button>
                 </div>
             </div>
@@ -1430,14 +1477,6 @@
             });
         });
 
-        document.getElementById('startQuizBtn').addEventListener('click', function() {
-            if (!selectedType) return;
-            questions = quizData[selectedType];
-            document.querySelector('.selection-screen').classList.remove('active');
-            document.querySelector('.question-screen').classList.add('active');
-            loadQuestion();
-        });
-
         function loadQuestion() {
             const question = questions[currentQuestionIndex];
             const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
@@ -1634,33 +1673,41 @@
             const weaknesses = [];
 
             Object.entries(categories).forEach(([category, data]) => {
+                // Show all categories with their performance
                 if (data.correct === data.total) {
                     strengths.push(`<strong>${category}</strong> - Perfect score! You've mastered this area. 🏆`);
                 } else if (data.correct / data.total >= 0.5) {
                     strengths.push(`<strong>${category}</strong> - ${data.correct} out of ${data.total} correct. You're on the right track! ✓`);
                 } else {
+                    // For categories where user got less than 50%, show detailed insights
                     const insight = categoryInsights[category];
                     if (insight) {
                         weaknesses.push(`
-                            <div style="margin-bottom: 20px;">
-                                <strong style="color: #f57c00; font-size: 16px;">${category}</strong>
+                            <li style="list-style: none; margin-bottom: 20px;">
+                                <strong style="color: #f57c00; font-size: 16px;">${category}</strong> - ${data.correct} out of ${data.total} correct
                                 <p style="margin: 8px 0; color: #666; line-height: 1.6;">${insight.insight}</p>
                                 <p style="margin: 8px 0; padding: 10px; background: #fff3e0; border-radius: 6px; color: #e65100; font-size: 14px;">
                                     💡 ${insight.tip}
                                 </p>
-                            </div>
+                            </li>
                         `);
+                    } else {
+                        weaknesses.push(`<strong>${category}</strong> - ${data.correct} out of ${data.total} correct. Room for improvement here!`);
                     }
                 }
             });
 
-            document.getElementById('strengthsList').innerHTML = strengths.map(s => `<li style="margin-bottom: 8px;">${s}</li>`).join('');
+            if (strengths.length > 0) {
+                document.getElementById('strengthsList').innerHTML = strengths.map(s => `<li style="margin-bottom: 8px;">${s}</li>`).join('');
+            } else {
+                document.getElementById('strengthsList').innerHTML = '<li>Keep learning! <span style="font-weight: 700;">Santino</span> can guide you through these concepts.</li>';
+            }
 
             if (weaknesses.length > 0) {
                 document.getElementById('weaknessesList').innerHTML = weaknesses.join('');
                 document.querySelector('#weaknesses h3').textContent = '📚 Knowledge to Explore';
             } else {
-                document.getElementById('weaknessesList').innerHTML = '<li>You\'re doing fantastic! Santino can help you apply this knowledge to your specific situation.</li>';
+                document.getElementById('weaknessesList').innerHTML = '<li>You\'re doing fantastic! <span style="font-weight: 700;">Santino</span> can help you apply this knowledge to your specific situation.</li>';
             }
 
             document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
